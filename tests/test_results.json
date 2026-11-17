@@ -1,0 +1,188 @@
+{
+  "timestamp": "2026-11-17T14:36:18.804027",
+  "total": 20,
+  "passed": 20,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "TC-01",
+      "title": "User Registration - Valid Credentials",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 201, User registered, JWT tokens generated",
+      "actual": "HTTP 201, User: test_1794906377@example.com",
+      "elapsed": 441.06769999780226,
+      "passed": true
+    },
+    {
+      "id": "TC-02",
+      "title": "User Registration - Password Mismatch Validation",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 400 Bad Request with confirm_password error",
+      "actual": "HTTP 400, Error: {'confirm_password': ['Passwords do not match.']}",
+      "elapsed": 7.729399992967956,
+      "passed": true
+    },
+    {
+      "id": "TC-03",
+      "title": "User Registration - Duplicate Email Rejection",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 400 Bad Request, email already exists",
+      "actual": "HTTP 400, Error: {'email': ['user with this email already exists.']}",
+      "elapsed": 25.46159998746589,
+      "passed": true
+    },
+    {
+      "id": "TC-04",
+      "title": "User Login - Valid Credentials",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 200 OK, JWT access & refresh tokens returned",
+      "actual": "HTTP 200, Token Length: 231",
+      "elapsed": 439.7369000071194,
+      "passed": true
+    },
+    {
+      "id": "TC-05",
+      "title": "User Login - Invalid Password Handling",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 401 Unauthorized, 'Invalid email or password.'",
+      "actual": "HTTP 401, Detail: Invalid email or password.",
+      "elapsed": 431.469900009688,
+      "passed": true
+    },
+    {
+      "id": "TC-06",
+      "title": "JWT Authentication - Token Refresh",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 200 OK, New JWT access token issued",
+      "actual": "HTTP 200, New Access Token Length: 231",
+      "elapsed": 5.235600008745678,
+      "passed": true
+    },
+    {
+      "id": "TC-07",
+      "title": "User Profile Endpoint (/api/auth/me/)",
+      "module": "UC-01 Auth",
+      "expected": "HTTP 200 OK, Profile name 'Harish S' & email 'harish@example.com'",
+      "actual": "HTTP 200, Name: 'Harish S', Email: 'harish@example.com'",
+      "elapsed": 23.796900000888854,
+      "passed": true
+    },
+    {
+      "id": "TC-08",
+      "title": "Security - Protected Endpoint Unauthenticated Access",
+      "module": "Security",
+      "expected": "HTTP 401 Unauthorized when Bearer token is missing",
+      "actual": "HTTP 401 HTTP Error 401: Unauthorized",
+      "elapsed": 3.5146000009262934,
+      "passed": true
+    },
+    {
+      "id": "TC-09",
+      "title": "Category Listing & Seed Verification",
+      "module": "UC-02 Dashboard",
+      "expected": "HTTP 200 OK, 5 categories with icons and hex colors",
+      "actual": "HTTP 200, Found 5 categories: ['Food & Dining', 'Shopping', 'Transport', 'Entertainment', 'Others']",
+      "elapsed": 6.938999998965301,
+      "passed": true
+    },
+    {
+      "id": "TC-10",
+      "title": "Dashboard Summary KPI Metrics Baseline",
+      "module": "UC-02 Dashboard",
+      "expected": "HTTP 200, Income: \u20b925,000, Expenses: \u20b916,750, Savings: \u20b98,250",
+      "actual": "HTTP 200, Inc: \u20b925000.0, Exp: \u20b916750.0, Sav: \u20b98250.0",
+      "elapsed": 23.69380000163801,
+      "passed": true
+    },
+    {
+      "id": "TC-11",
+      "title": "Financial Integrity - Savings Balance Invariant",
+      "module": "UC-02 Dashboard",
+      "expected": "Savings equals (Total Income - Total Expenses)",
+      "actual": "Income (25000.0) - Expenses (16750.0) = 8250.0 == Savings (8250.0)",
+      "elapsed": 0.05,
+      "passed": true
+    },
+    {
+      "id": "TC-12",
+      "title": "Expense Overview Line Chart - Mon to Sun Curve",
+      "module": "UC-02 Dashboard",
+      "expected": "HTTP 200, 7 daily data points (Mon-Sun) with income & expenses",
+      "actual": "HTTP 200, 7 points, Mon: Inc 13500/Exp 7000",
+      "elapsed": 5.206500005442649,
+      "passed": true
+    },
+    {
+      "id": "TC-13",
+      "title": "Expense Overview Chart - Range Filtering",
+      "module": "UC-02 Dashboard",
+      "expected": "HTTP 200, 'last_month' returns 4 weeks, '6_months' returns 6 months",
+      "actual": "Last Month: 4 pts, 6 Months: 6 pts",
+      "elapsed": 9.98230000550393,
+      "passed": true
+    },
+    {
+      "id": "TC-14",
+      "title": "Category Spending Donut Distribution (Percentages Sum = 100%)",
+      "module": "UC-02 Dashboard",
+      "expected": "HTTP 200, Total: \u20b916,750, Categories sum to 100%",
+      "actual": "HTTP 200, Total: \u20b916750.0, Sum Percentage: 100%",
+      "elapsed": 28.193900012411177,
+      "passed": true
+    },
+    {
+      "id": "TC-15",
+      "title": "Recent Transactions List (Limit=4) Chronology",
+      "module": "UC-02 Dashboard",
+      "expected": "HTTP 200, Exactly 4 recent transactions, latest first (Domino's)",
+      "actual": "HTTP 200, Count: 4, 1st: 'Food - Domino's' (-\u20b9420.00)",
+      "elapsed": 8.021599991479889,
+      "passed": true
+    },
+    {
+      "id": "TC-16",
+      "title": "Add Transaction - Valid Expense Record",
+      "module": "UC-03 Transaction",
+      "expected": "HTTP 201 Created, Transaction persisted with ID and formatted date",
+      "actual": "HTTP 201, Created Tx ID: 44, Amount: \u20b9750.00",
+      "elapsed": 42.97419999784324,
+      "passed": true
+    },
+    {
+      "id": "TC-17",
+      "title": "Dynamic Reactive Recalculation of Totals & Savings",
+      "module": "UC-03 Transaction",
+      "expected": "Total Expenses increases to \u20b917,500 (+\u20b9750), Savings drops to \u20b97,500",
+      "actual": "HTTP 200, Expenses: \u20b917500.0, Savings: \u20b97500.0",
+      "elapsed": 9.849099995335564,
+      "passed": true
+    },
+    {
+      "id": "TC-18",
+      "title": "Add Transaction Validation - Negative/Zero Amount Rejection",
+      "module": "UC-03 Transaction",
+      "expected": "HTTP 400 Bad Request, 'Amount must be greater than zero.'",
+      "actual": "HTTP 400, Error: {'amount': ['Amount must be greater than zero.']}",
+      "elapsed": 17.989999993005767,
+      "passed": true
+    },
+    {
+      "id": "TC-19",
+      "title": "Transaction Deletion & Baseline Reversion",
+      "module": "UC-03 Transaction",
+      "expected": "HTTP 204 No Content, Expenses restored to \u20b916,750, Savings to \u20b98,250",
+      "actual": "HTTP 204, Restored Expenses: \u20b916750.0, Savings: \u20b98250.0",
+      "elapsed": 17.431699990993366,
+      "passed": true
+    },
+    {
+      "id": "TC-20",
+      "title": "Unified Merged Link & Asset Bundling Delivery",
+      "module": "Deployment",
+      "expected": "HTTP 200 OK for HTML and bundled JS/CSS on merged port 8000",
+      "actual": "HTML Status: 200, Assets Verified: True (2 assets found)",
+      "elapsed": 3.2113999914145097,
+      "passed": true
+    }
+  ]
+}
